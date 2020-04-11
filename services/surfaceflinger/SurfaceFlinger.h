@@ -893,6 +893,8 @@ private:
             std::vector<std::pair<Layer*, sp<LayerFE>>>& layers,
             std::vector<sp<LayerFE>>& layerFEs);
 
+    bool canAllocateHwcDisplayIdForVDS(uint64_t usage);
+
     void readPersistentProperties();
 
     uint32_t getMaxAcquiredBufferCountForCurrentRefreshRate(uid_t uid) const;
