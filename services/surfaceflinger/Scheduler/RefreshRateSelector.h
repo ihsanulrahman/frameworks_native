@@ -590,6 +590,8 @@ private:
     // Used to detect (lack of) frame activity.
     ftl::Optional<scheduler::OneShotTimer> mIdleTimer;
     std::atomic<bool> mIdleTimerStarted = false;
+
+    Fps mIdleFps = 60_Hz;
 };
 
 } // namespace android::scheduler
