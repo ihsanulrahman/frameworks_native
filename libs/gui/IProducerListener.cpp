@@ -188,13 +188,4 @@ bool BnProducerListener::needsReleaseNotify() {
 void BnProducerListener::onBuffersDiscarded(const std::vector<int32_t>& /*discardedSlots*/) {
 }
 
-#if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_CONSUMER_ATTACH_CALLBACK)
-bool BnProducerListener::needsAttachNotify() {
-    return true;
-}
-#endif
-
-void BnProducerListener::onBufferDetached(int slot) {
-    ALOGE("BnProducerListener::onBufferDetached slot: %d",slot);
-}
 } // namespace android
