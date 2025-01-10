@@ -169,10 +169,10 @@ protected:
         if (hasSurfaceListener) {
             listener = new FakeSurfaceListener(enableReleasedCb);
         }
-        ASSERT_EQ(OK,
-                  surface->connect(NATIVE_WINDOW_API_CPU,
-                                   /*listener*/ listener,
-                                   /*reportBufferRemoval*/ true));
+        ASSERT_EQ(OK, surface->connect(
+                NATIVE_WINDOW_API_CPU,
+                /*reportBufferRemoval*/true,
+                /*listener*/listener));
         const int BUFFER_COUNT = 4 + extraDiscardedBuffers;
         ASSERT_EQ(NO_ERROR, native_window_set_buffer_count(window.get(), BUFFER_COUNT));
         ASSERT_EQ(NO_ERROR, native_window_set_usage(window.get(), TEST_PRODUCER_USAGE_BITS));
@@ -507,10 +507,10 @@ TEST_F(SurfaceTest, GetAndFlushRemovedBuffers) {
     sp<Surface> surface = new Surface(producer);
     sp<ANativeWindow> window(surface);
     sp<StubSurfaceListener> listener = new StubSurfaceListener();
-    ASSERT_EQ(OK,
-              surface->connect(NATIVE_WINDOW_API_CPU,
-                               /*listener*/ listener,
-                               /*reportBufferRemoval*/ true));
+    ASSERT_EQ(OK, surface->connect(
+            NATIVE_WINDOW_API_CPU,
+            /*listener*/listener,
+            /*reportBufferRemoval*/true));
     const int BUFFER_COUNT = 4;
     ASSERT_EQ(NO_ERROR, native_window_set_buffer_count(window.get(), BUFFER_COUNT));
     ASSERT_EQ(NO_ERROR, native_window_set_usage(window.get(), TEST_PRODUCER_USAGE_BITS));
@@ -2367,7 +2367,7 @@ TEST_F(SurfaceTest, QueueAcquireReleaseDequeue_CalledInStack_DoesNotDeadlock) {
     consumer->setFrameAvailableListener(consumerListener);
 
     sp<DequeuingSurfaceListener> surfaceListener = sp<DequeuingSurfaceListener>::make(surface);
-    EXPECT_EQ(OK, surface->connect(NATIVE_WINDOW_API_CPU, surfaceListener, false));
+    EXPECT_EQ(OK, surface->connect(NATIVE_WINDOW_API_CPU, false, surfaceListener));
 
     EXPECT_EQ(OK, surface->setMaxDequeuedBufferCount(2));
 

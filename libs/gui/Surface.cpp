@@ -2076,6 +2076,15 @@ int Surface::connect(int api) {
     return connect(api, listener);
 }
 
+int Surface::connect(int api, const sp<SurfaceListener>& listener) {
+    return connect(api, listener, false);
+}
+
+int Surface::connect(
+        int api, bool reportBufferRemoval, const sp<SurfaceListener>& sListener) {
+    return connect(api, sListener, reportBufferRemoval);
+}
+
 int Surface::connect(int api, const sp<SurfaceListener>& listener, bool reportBufferRemoval) {
     ATRACE_CALL();
     ALOGV("Surface::connect");
